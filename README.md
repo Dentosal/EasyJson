@@ -1,6 +1,6 @@
 # EasyJson
 
-An Easy-to-use, not-so-idiomatic and mostly functional JSON library written in Scala. It provides an api similar to the one from [the json library of Python](https://docs.python.org/3.5/library/json.html).
+An easy-to-use and mostly functional style JSON library written in Scala. It provides an api similar to the one from [the json library of Python](https://docs.python.org/3.5/library/json.html).
 
 # Download
 
