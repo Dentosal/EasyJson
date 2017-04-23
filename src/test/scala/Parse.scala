@@ -81,3 +81,97 @@ class RootObjectTest extends FlatSpec {
         }
     }
 }
+
+class SimpleValueTest extends FlatSpec {
+    "EasyJson" should "be able to load true" in {
+        EasyJson.loads("true", true)
+    }
+    it should "be able to load false" in {
+        EasyJson.loads("false", true)
+    }
+    it should "be able to load null" in {
+        EasyJson.loads("null", true)
+    }
+}
+
+class StringTest extends FlatSpec {
+    "EasyJson" should "be able to load an empty string" in {
+        EasyJson.loads("\"\"", true)
+    }
+    it should "be able to load a string with one space" in {
+        EasyJson.loads("\" \"", true)
+    }
+    it should "be able to load a string with example name" in {
+        EasyJson.loads("\"Example Name\"", true)
+    }
+    it should "be able to load a string with some data" in {
+        EasyJson.loads("\"a b.32 asf!!\"", true)
+    }
+    it should "be able to load a string only an integer" in {
+        EasyJson.loads("\"42\"", true)
+    }
+    it should "be able to load a string only a float" in {
+        EasyJson.loads("\"3.14\"", true)
+    }
+    it should "be able to load a string with escaped chars" in {
+        EasyJson.loads("\"\\\"abc\"", true)
+    }
+}
+
+class IntegerTest extends FlatSpec {
+    "EasyJson" should "be able to load 0" in {
+        EasyJson.loads("0", true)
+    }
+    it should "be able to load 1" in {
+        EasyJson.loads("1", true)
+    }
+    it should "be able to load -1" in {
+        EasyJson.loads("-1", true)
+    }
+    it should "be able to load 42" in {
+        EasyJson.loads("42", true)
+    }
+    it should "be able to load -42" in {
+        EasyJson.loads("-42", true)
+    }
+}
+
+class FloatTest extends FlatSpec {
+    "EasyJson" should "be able to load zero" in {
+        EasyJson.loads("0.0", true)
+    }
+    it should "be able to load negative zero" in {
+        EasyJson.loads("-0.0", true)
+    }
+    it should "be able to load an approximation of pi" in {
+        EasyJson.loads("3.14", true)
+    }
+    it should "be able to load a negative approximation of pi" in {
+        EasyJson.loads("-3.14", true)
+    }
+    it should "throw an error when loading NaN" in {
+        assertThrows[ParseError] {
+            EasyJson.loads("NaN", true)
+        }
+    }
+    it should "throw an error when loading Infinity" in {
+        assertThrows[ParseError] {
+            EasyJson.loads("Infinity", true)
+        }
+    }
+    it should "throw an error when loading Inf" in {
+        assertThrows[ParseError] {
+            EasyJson.loads("Inf", true)
+        }
+    }
+    it should "throw an error when loading negative Infinity" in {
+        assertThrows[ParseError] {
+            EasyJson.loads("-Infinity", true)
+        }
+    }
+    it should "throw an error when loading negative Inf" in {
+        assertThrows[ParseError] {
+            EasyJson.loads("-Inf", true)
+        }
+    }
+}

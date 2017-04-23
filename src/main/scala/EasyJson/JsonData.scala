@@ -1,6 +1,17 @@
 package EasyJson
 
 class JsonData(private val data: Any) {
+    def has_key(k: String): Boolean = this.as[Map[String, Any]] contains k
+
+    def keys: Set[String] = this.as[Map[String, Any]].keys.toSet
+
+    def length: Int = this.data match {
+        case c: String      => c.length
+        case c: Vector[_]   => c.length
+        case c: Map[_,_]    => c.toSeq.length
+        case _ => throw new QueryError("Does not have length.")
+    }
+
     def key(k: String): JsonData = {
         this.to[Map[String, Any]] match {
             case Some(v) => {
