@@ -1,7 +1,7 @@
 import EasyJson.EasyJson
 import org.scalatest._
 
-class FlatTest extends FlatSpec {
+class FloatTest extends FlatSpec {
     "EasyJson" should "be able to load 0" in {
         EasyJson.loads("0.0", true)
     }
