@@ -44,6 +44,12 @@ Or just:
 JAR="$(sbt -no-colors assembly 2>&1 | sed -En 's/\[info\][^/]+(\/.+\/target\/.+\.jar).*/\1/p' | tr -d '\n')" && cd example && scala -classpath $JAR Example.scala && cd ..
 ```
 
+# Running tests
+
+```
+sbt test
+```
+
 
 # TODO
 
