@@ -30,8 +30,6 @@ object Parser {
     }
 
     def scanForwardValue(string: String): Result[(Any, Int)] = {
-        println("SFW: "+string);
-
         if (string.startsWith("null")) {
             Ok((null, 4))
         }
@@ -54,7 +52,7 @@ object Parser {
             scanForwardNumber(string)
         }
         else {
-            Err("Unexpected character '"+string(0)+"'."+string.take(100))
+            Err("Unexpected character '"+string(0)+"'. (continues with "+string.take(10)+")")
         }
     }
 
@@ -249,19 +247,24 @@ object Parser {
                 if (nfloat) {
                     var over = false;
                     while (!over) {
-                        if ("0123456789" contains numval(index)) {
-                            fractional_part += numval(index);
-                        }
-                        else if ("eE" contains numval(index)) {
+                        if (index >= numval.length) {
                             over = true;
-                            efloat = true;
                         }
                         else {
-                            over = true;
-                            all_over = true;
-                            index -= 1;
+                            if ("0123456789" contains numval(index)) {
+                                fractional_part += numval(index);
+                            }
+                            else if ("eE" contains numval(index)) {
+                                over = true;
+                                efloat = true;
+                            }
+                            else {
+                                over = true;
+                                all_over = true;
+                                index -= 1;
+                            }
+                            index += 1;
                         }
-                        index += 1;
                     }
                 }
 
