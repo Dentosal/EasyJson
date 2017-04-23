@@ -39,16 +39,16 @@ class RootObjectTest extends FlatSpec {
         EasyJson.loads("{\"a\": [], \"b\": []}")
     }
     it should "be able to load dataset 0" in {
-        EasyJson.loads("{\"meta\": {}, \"options\": {}, \"data\": []}")
+        EasyJson.loads("{\"meta\": {}, \"options\": {}, \"data\": []}")
     }
     it should "be able to load dataset 1" in {
-        EasyJson.loads("{\"meta\": {}, \"options\": {}, \"data\": [0, 0, 0, 1, 2, 100, 0]}")
+        EasyJson.loads("{\"meta\": {}, \"options\": {}, \"data\": [0, 0, 0, 1, 2, 100, 0]}")
     }
     it should "be able to load dataset 2" in {
-        EasyJson.loads("{\"meta\": {}, \"options\": {\"title\": \"Workload\", \"axisLabels\": [\"Day\", \"Work\"], \"axisUnits\": [\"\", \"h\"], \"gridOn\": false, \"gridSize\": 0}, \"data\": [0, 0, 0, 1, 2, 100, 0]}")
+        EasyJson.loads("{\"meta\": {}, \"options\": {\"title\": \"Workload\", \"axisLabels\": [\"Day\", \"Work\"], \"axisUnits\": [\"\", \"h\"], \"gridOn\": false, \"gridSize\": 0}, \"data\": [0, 0, 0, 1, 2, 100, 0]}")
     }
     it should "be able to load dataset 3" in {
-        EasyJson.loads("{\"meta\": {\"version\": \"0.1.0\", \"libVersion\": \"0.1.0\", \"author\": \"John Smith\", \"created\": \"2017-04-23\", \"modified\": \"2017-04-23\"}, \"options\": {\"title\": \"Workload\", \"axisLabels\": [\"Day\", \"Work\"], \"axisUnits\": [\"\", \"h\"], \"gridOn\": false, \"gridSize\": 0}, \"data\": [0, 0, 0, 1, 2, 100, 0]}")
+        EasyJson.loads("{\"meta\": {\"version\": \"0.1.0\", \"libVersion\": \"0.1.0\", \"author\": \"John Smith\", \"created\": \"2017-04-23\", \"modified\": \"2017-04-23\"}, \"options\": {\"title\": \"Workload\", \"axisLabels\": [\"Day\", \"Work\"], \"axisUnits\": [\"\", \"h\"], \"gridOn\": false, \"gridSize\": 0}, \"data\": [0, 0, 0, 1, 2, 100, 0]}")
     }
     it should "throw an error on invalid root type" in {
         assertThrows[ParseError] {
