@@ -13,7 +13,7 @@ object Parser {
                     Ok(v._1)
                 }
                 else {
-                    if (v._1.isInstanceOf[Int] || v._1.isInstanceOf[Double] || v._1.isInstanceOf[String]) {
+                    if (!v._1.isInstanceOf[Vector[_]] && !v._1.isInstanceOf[Map[_,_]]) {
                         Err("Invalid root type.")
                     }
                     else {

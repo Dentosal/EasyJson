@@ -50,9 +50,34 @@ class RootObjectTest extends FlatSpec {
     it should "be able to load dataset 3" in {
         EasyJson.loads("{\"meta\": {\"version\": \"0.1.0\", \"libVersion\": \"0.1.0\", \"author\": \"John Smith\", \"created\": \"2017-04-23\", \"modified\": \"2017-04-23\"}, \"options\": {\"title\": \"Workload\", \"axisLabels\": [\"Day\", \"Work\"], \"axisUnits\": [\"\", \"h\"], \"gridOn\": false, \"gridSize\": 0}, \"data\": [0, 0, 0, 1, 2, 100, 0]}")
     }
-    it should "throw an error on invalid root type" in {
+    it should "throw an error on invalid root type (integer)" in {
         assertThrows[ParseError] {
             EasyJson.loads("0")
+        }
+    }
+    it should "throw an error on invalid root type (float)" in {
+        assertThrows[ParseError] {
+            EasyJson.loads("0.0")
+        }
+    }
+    it should "throw an error on invalid root type (string)" in {
+        assertThrows[ParseError] {
+            EasyJson.loads("\"a\"")
+        }
+    }
+    it should "throw an error on invalid root type (true)" in {
+        assertThrows[ParseError] {
+            EasyJson.loads("true")
+        }
+    }
+    it should "throw an error on invalid root type (false)" in {
+        assertThrows[ParseError] {
+            EasyJson.loads("false")
+        }
+    }
+    it should "throw an error on invalid root type (none)" in {
+        assertThrows[ParseError] {
+            EasyJson.loads("none")
         }
     }
 }
