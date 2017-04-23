@@ -30,6 +30,8 @@ object Parser {
     }
 
     def scanForwardValue(string: String): Result[(Any, Int)] = {
+        println("SFW: "+string);
+
         if (string.startsWith("null")) {
             Ok((null, 4))
         }
@@ -222,22 +224,27 @@ object Parser {
                 var all_over = false;
 
                 while (integer && !all_over) {
-                    if ("0123456789" contains numval(index)) {
-                        interger_part += numval(index);
-                    }
-                    else if (numval(index) == '.') {
-                        nfloat = true;
-                        integer = false;
-                    }
-                    else if ("eE" contains numval(index)) {
-                        efloat = true;
-                        integer = false;
-                    }
-                    else {
-                        index -= 1;
+                    if (index >= numval.length) {
                         all_over = true;
                     }
-                    index += 1;
+                    else {
+                        if ("0123456789" contains numval(index)) {
+                            interger_part += numval(index);
+                        }
+                        else if (numval(index) == '.') {
+                            nfloat = true;
+                            integer = false;
+                        }
+                        else if ("eE" contains numval(index)) {
+                            efloat = true;
+                            integer = false;
+                        }
+                        else {
+                            index -= 1;
+                            all_over = true;
+                        }
+                        index += 1;
+                    }
                 }
                 if (nfloat) {
                     var over = false;
