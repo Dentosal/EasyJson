@@ -1,4 +1,4 @@
-import EasyJson.EasyJson
+import EasyJson.{EasyJson, ParseError}
 import org.scalatest._
 
 class RootObjectTest extends FlatSpec {
@@ -51,6 +51,8 @@ class RootObjectTest extends FlatSpec {
         EasyJson.loads("{\"meta\": {\"version\": \"0.1.0\", \"libVersion\": \"0.1.0\", \"author\": \"John Smith\", \"created\": \"2017-04-23\", \"modified\": \"2017-04-23\"}, \"options\": {\"title\": \"Workload\", \"axisLabels\": [\"Day\", \"Work\"], \"axisUnits\": [\"\", \"h\"], \"gridOn\": false, \"gridSize\": 0}, \"data\": [0, 0, 0, 1, 2, 100, 0]}")
     }
     it should "throw an error on invalid root type" in {
-        EasyJson.loads("0")
+        assertThrows[ParseError] {
+            EasyJson.loads("0")
+        }
     }
 }
