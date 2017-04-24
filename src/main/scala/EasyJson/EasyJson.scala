@@ -13,7 +13,7 @@ object EasyJson {
     /** Load JSON data from given string */
     def loads(jsondata: String, allowAnyRoot: Boolean = false): JsonData = {
         Parser.scan(jsondata, allowAnyRoot) match {
-            case Ok(v) => new JsonData(v)
+            case Ok(v) => JsonData(v)
             case Err(e) => throw new ParseError(e)
         }
     }

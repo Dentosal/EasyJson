@@ -27,21 +27,24 @@ object Formatter {
         '"'+(s map escape mkString "")+'"'
     }
     def fmtVector(v: Vector[_]) = {
-        '['+(v map {v: Any => format(new JsonData(v))}).mkString(",")+']'
+        '['+(v map {v: Any => v match {
+            case d: JsonData => format(d)
+            case x => x
+        }}).mkString(",")+']'
     }
     def fmtMap(m: Map[String, _]) = {
-        '{'+(m map {case (k: String, v: Any) => format(new JsonData(k))+":"+format(new JsonData(v))} mkString ",")+'}'
+        '{'+(m map {case (k: String, v: JsonData) => fmtString(k)+":"+format(v)} mkString ",")+'}'
     }
 
     def format(data: JsonData): String = {
-        data.typename match {
-            case "Null"     => "null"
-            case "Boolean"  => data.as[Boolean].toString
-            case "Int"      => data.as[Int].toString
-            case "Double"   => data.as[Double].toString
-            case "String"   => fmtString(data.as[String])
-            case "Vector"   => fmtVector(data.as[Vector[_]])
-            case "Map"      => fmtMap(data.as[Map[String, _]])
+        data match {
+            case JsonNull()     => "null"
+            case JsonBoolean(v) => v.toString
+            case JsonInteger(v) => v.toString
+            case JsonFloat(v)   => v.toString
+            case JsonString(v)  => fmtString(v)
+            case JsonArray(v)   => fmtVector(v)
+            case JsonObject(v)  => fmtMap(v)
         }
     }
 }
