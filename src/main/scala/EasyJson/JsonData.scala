@@ -25,6 +25,55 @@ abstract class JsonData {
             case _: NoSuchElementException => throw new QueryError("Incorrect type.")
         }
     }
+
+
+    def key(k: String): JsonData = {
+        this match {
+            case JsonObject(v) => {
+                if (v contains k) {
+                    v(k)
+                }
+                else {
+                    throw new NoSuchElementException("Key does not exist.")
+                }
+            }
+            case _ => throw new NoSuchElementException("Not an Object.")
+        }
+    }
+
+    def index(i: Int): JsonData = {
+        if (i < 0) {
+            throw new IndexOutOfBoundsException("Negative index.")
+        }
+        this match {
+            case JsonArray(v) => {
+                if (i < v.length) {
+                    v(i)
+                }
+                else {
+                    throw new IndexOutOfBoundsException("Index too large.")
+                }
+            }
+            case _ => throw new NoSuchElementException("Not an Array.")
+        }
+    }
+
+    def select(a: Any): JsonData = {
+        a match {
+            case i: Int => this.index(i)
+            case k: String => this.key(k)
+            case p: Product => {
+                this.select(p.productIterator.toVector)
+            }
+            case Seq(elem) => {
+                this.select(elem)
+            }
+            case Seq(elem, elems@_*) => {
+                this.select(elem).select(elems)
+            }
+            case _ => throw new QueryError("Invalid type to query with.")
+        }
+    }
 }
 
 case class JsonObject(value: Map[String, JsonData]) extends JsonData;
