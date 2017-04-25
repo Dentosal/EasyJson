@@ -1,9 +1,6 @@
 import EasyJson._
 import org.scalatest._
 
-import shapeless._
-
-
 class InspectionTest extends FlatSpec {
     "JsonData" should "return correct length for a list" in {
         assert(EasyJson.loads("[]").as[Vector[_]].length == 0)

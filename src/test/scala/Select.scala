@@ -1,9 +1,6 @@
 import EasyJson._
 import org.scalatest._
 
-import shapeless._
-
-
 class SelectTest extends FlatSpec {
     "JsonData.select" should "be able to select an element from an object by key" in {
         assert(EasyJson.loads("{\"a\": 2}").select("a").as[Int]*3 == 6)
