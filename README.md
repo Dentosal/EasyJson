@@ -53,9 +53,8 @@ sbt test
 
 # TODO
 
-* Documentation would possibly be a cool thing to add.
-* Unit test would probably find some edge cases.
-* Deserialization to case classes would most likely be helpful.
+* Documentation would possibly be a cool thing to add
+* Verifying against a schema would be a nice addtion
 
 # License
 
