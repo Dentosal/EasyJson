@@ -17,6 +17,21 @@ class DumpTest extends FlatSpec {
     it should "be able to dump a mixed list" in {
         assert(EasyJson.dumps(JsonData(Vector("a", 42, 3.14))) == "[\"a\",42,3.14]")
     }
+    it should "be able to dump an empty string" in {
+        assert(EasyJson.dumps(JsonData("")) == "\"\"")
+    }
+    it should "be able to dump zero (integer)" in {
+        assert(EasyJson.dumps(JsonData(0)) == "0")
+    }
+    it should "be able to dump zero (float)" in {
+        assert(EasyJson.dumps(JsonData(0.0)) == "0.0")
+    }
+    it should "be able to dump a list with one integer" in {
+        assert(EasyJson.dumps(JsonData(Vector(1234))) == "[1234]")
+    }
+    it should "be able to dump a list with a single key" in {
+        assert(EasyJson.dumps(JsonData(Map("a" -> 1234))) == "{\"a\":1234}")
+    }
 }
 
 class LoadAndDumpTest extends FlatSpec {
